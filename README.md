@@ -1,12 +1,5 @@
 # Laravel Nova Detached Actions Tool
 
-![Status: ABANDONED](https://img.shields.io/badge/Status-ABANDONED-red.svg?style=flat)
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/) 
-
-## Deprecation Notice :warning:
-
-> GoBrightspot is no longer maintaining this project. Please fork it to continue development.
-
 ## Intro
 
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
@@ -22,7 +15,7 @@ A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached f
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
 ```bash
-composer require gobrightspot/nova-detached-actions
+composer require datomatic/nova-detached-actions
 ```
 
 The tool will be automatically registered via the `ToolServiceProvider`
