@@ -1,6 +1,6 @@
 <?php
 
-namespace Brightspot\Nova\Tools\DetachedActions;
+namespace Datomatic\Nova\Tools\DetachedActions;
 
 use Laravel\Nova\Actions\DispatchAction as NovaDispatchAction;
 use Laravel\Nova\Nova;

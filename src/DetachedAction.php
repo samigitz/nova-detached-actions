@@ -1,6 +1,6 @@
 <?php
 
-namespace Brightspot\Nova\Tools\DetachedActions;
+namespace Datomatic\Nova\Tools\DetachedActions;
 
 use Laravel\Nova\Nova;
 use Illuminate\Support\Arr;

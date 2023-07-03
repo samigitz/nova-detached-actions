@@ -28,7 +28,7 @@ Create a custom Nova Action file:
 php artisan nova:action ExportUsers
 ```
 
-Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Brightspot\Nova\Tools\DetachedActions\DetachedAction` class.
+Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Datomatic\Nova\Tools\DetachedActions\DetachedAction` class.
 
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
@@ -46,7 +46,7 @@ Here's a full example:
 
 namespace App\Nova\Actions;
 
-use Brightspot\Nova\Tools\DetachedActions\DetachedAction;
+use Datomatic\Nova\Tools\DetachedActions\DetachedAction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
