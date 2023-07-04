@@ -6,7 +6,7 @@ mix
   .setPublicPath("dist")
   .js("resources/js/tool.js", "js")
   .vue({ version: 3 })
-  .nova("datomatic/nova-detached-actions");
+  .nova("gobrightspot/nova-detached-actions");
 
 mix.alias({
   "laravel-nova": path.join(
