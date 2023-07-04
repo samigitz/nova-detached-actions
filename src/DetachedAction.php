@@ -65,13 +65,6 @@ abstract class DetachedAction extends Action
     public $standalone = true;
 
     /**
-     * The displayable label of the button.
-     *
-     * @var string
-     */
-    public $label;
-
-    /**
      * Extra CSS classes to apply to detached action button.
      *
      * @var array
@@ -98,16 +91,6 @@ abstract class DetachedAction extends Action
      * @var array
      */
     public $defaultClasses = ['btn-primary'];
-
-    /**
-     * Get the displayable label of the button.
-     *
-     * @return string
-     */
-    public function label()
-    {
-        return $this->label ?: Nova::humanize($this);
-    }
 
     /**
      * Determine if the action is to be shown on the custom index toolbar.
@@ -335,7 +318,6 @@ abstract class DetachedAction extends Action
     {
         return array_merge([
             'detachedAction' => true,
-            'label' => $this->label(),
             'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
             'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
             'classes' => $this->getClasses(),

@@ -3,7 +3,7 @@
         :data-testid="actionId"
         :dusk="duskId"
         @click.prevent="click"
-        :title="__(action.label)"
+        :title="__(action.name)"
         class="flex-shrink-0 shadow rounded focus:outline-none ring-primary-200 dark:ring-gray-600 focus:ring bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0"
         :class="action.classes"
     >
@@ -14,7 +14,7 @@
             width="24"
           />
         </span>
-        <span>{{ __(action.label) }}</span>
+        <span>{{ __(action.name) }}</span>
     </button>
 </template>
 <script>

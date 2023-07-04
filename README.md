@@ -32,7 +32,7 @@ Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Acti
 
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
-You can also customize the button label, by overriding the `label()` method. If you do not override the label, it will 'humanize' the class name, in the example `ExportUsers` would become `Export Users`.
+You can also customize the button name, by overriding the `name()` method. If you do not override the name, it will 'humanize' the class name, in the example `ExportUsers` would become `Export Users`.
 
 By default, the detached action will only appear on the Index Toolbar.
 
