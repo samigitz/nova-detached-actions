@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import InteractsWithResourceInformation from '@/mixins/InteractsWithResourceInformation'
-import HandlesActions from '@/mixins/HandlesActions'
+import HasActions from '@/mixins/HasActions'
 
 export default {
-  mixins: [HandlesActions, InteractsWithResourceInformation],
+  mixins: [HasActions, InteractsWithResourceInformation],
 
   data: () => ({
     visibleActionsDefault: 3,
