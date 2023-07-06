@@ -161,11 +161,11 @@ By default, the component will show the first 3 buttons and put the rest into a 
 public static function additionalInformation(Request $request)
 {
     return [
-        'visibleActionsLimit' => 4
+        'visibleActionsLimit' => 2
     ];
 }
 ```
-
+![invisible actions](branding/invisible_actions.jpg)
 
 ### Customizing Button Classes
 
