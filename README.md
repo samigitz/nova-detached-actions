@@ -186,10 +186,11 @@ return [
    (new ImportUsers)->extraClasses('bg-logo text-white hover:black')
 ];
 ```
+### The `$defaultClasses` variable
 
 You can also extend `DetachedAction` class and change the default classes on `$defaultClasses` variable.
 
-For example you can add the classes to be equal to nova primary button
+For example, you can add the classes to be equal to nova primary button
 
 ```
 shadow ring-primary-200 dark:ring-gray-600 bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800
