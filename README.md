@@ -8,7 +8,7 @@ A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached f
 
 :warning: Also, keep in mind, pivot actions are not supported and have not been tested.
 
-![buttons](branding/actions.jpg)
+![actions](branding/actions.jpg)
 
 With mobile compatibility
 
