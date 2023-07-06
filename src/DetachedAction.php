@@ -14,54 +14,11 @@ abstract class DetachedAction extends Action
      * @var bool
      */
     public $showOnIndexToolbar = true;
-
-    /**
-     * Indicates if this action is only available on the custom detail toolbar.
-     *
-     * @var bool
-     */
-    public $showOnDetailToolbar = true;
-
-    /**
-     * Indicates if this action is only available on the resource index view.
-     *
-     * @var bool
-     */
     public $onlyOnIndex = false;
-
-    /**
-     * Indicates if this action is only available on the resource detail view.
-     *
-     * @var bool
-     */
     public $onlyOnDetail = false;
-
-    /**
-     * Indicates if this action is available on the resource index view.
-     *
-     * @var bool
-     */
     public $showOnIndex = false;
-
-    /**
-     * Indicates if this action is available on the resource detail view.
-     *
-     * @var bool
-     */
     public $showOnDetail = false;
-
-    /**
-     * Indicates if this action is available on the resource's table row.
-     *
-     * @var bool
-     */
     public $showOnTableRow = false;
-
-    /**
-     * Indicates if the action can be run without any models.
-     *
-     * @var bool
-     */
     public $standalone = true;
 
     /**
@@ -70,6 +27,14 @@ abstract class DetachedAction extends Action
      * @var array
      */
     public $extraClasses = [];
+
+
+    /**
+     * Default CSS classes to apply to detached action button.
+     *
+     * @var array
+     */
+    public $defaultClasses = ['hover:bg-gray-200 dark:hover:bg-gray-800 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0'];
 
     /**
      * The icon type.
@@ -86,131 +51,6 @@ abstract class DetachedAction extends Action
     public $iconClasses = '';
 
     /**
-     * The default CSS classes to apply to detached action button.
-     *
-     * @var array
-     */
-    public $defaultClasses = ['btn-primary'];
-
-    /**
-     * Determine if the action is to be shown on the custom index toolbar.
-     *
-     * @return $this
-     */
-    public function showOnIndexToolbar()
-    {
-        $this->showOnIndexToolbar = true;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is to be shown only on the custom index toolbar.
-     *
-     * @return $this
-     */
-    public function onlyOnIndexToolbar()
-    {
-        $this->showOnIndexToolbar = true;
-        $this->showOnDetailToolbar = false;
-        $this->onlyOnIndex = false;
-        $this->onlyOnDetail = false;
-        $this->showOnIndex = false;
-        $this->showOnDetail = false;
-        $this->showOnTableRow = false;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is not to be shown on the index view.
-     *
-     * @return $this
-     */
-    public function exceptOnIndexToolbar()
-    {
-        $this->showOnIndexToolbar = false;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is to be shown on the custom index toolbar.
-     *
-     * @param  bool  $value
-     *
-     * @return $this
-     */
-    public function onlyOnIndex($value = true)
-    {
-        parent::onlyOnIndex($value);
-
-        $this->showOnIndexToolbar = $value;
-        $this->showOnDetailToolbar = ! $value;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is to be shown on the custom detail toolbar.
-     *
-     * @return $this
-     */
-    public function showOnDetailToolbar()
-    {
-        $this->showOnDetailToolbar = true;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is to be shown only on the custom detail toolbar.
-     *
-     * @return $this
-     */
-    public function onlyOnDetailToolbar()
-    {
-        $this->showOnDetailToolbar = true;
-        $this->showOnIndexToolbar = false;
-        $this->onlyOnIndex = false;
-        $this->onlyOnDetail = false;
-        $this->showOnIndex = false;
-        $this->showOnDetail = false;
-        $this->showOnTableRow = false;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is to be shown only on the detail view.
-     *
-     * @param  bool  $value
-     *
-     * @return $this
-     */
-    public function onlyOnDetail($value = true)
-    {
-        parent::onlyOnDetail($value);
-
-        $this->showOnIndexToolbar = false;
-        $this->showOnDetailToolbar = true;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the action is not to be shown on the detail view.
-     *
-     * @return $this
-     */
-    public function exceptOnDetailToolbar()
-    {
-        $this->showOnDetailToolbar = false;
-
-        return $this;
-    }
-
-    /**
      * Determine if the action is to be shown on the custom index toolbar.
      *
      * @return bool
@@ -218,26 +58,6 @@ abstract class DetachedAction extends Action
     public function shownOnIndexToolbar()
     {
         return $this->showOnIndexToolbar;
-    }
-
-    /**
-     * Determine if the action is to be shown on the custom detail toolbar.
-     *
-     * @return bool
-     */
-    public function shownOnDetailToolbar()
-    {
-        return $this->showOnDetailToolbar;
-    }
-
-    /**
-     * The default detached action classes.
-     *
-     * @return mixed
-     */
-    public function defaultClasses()
-    {
-        return $this->defaultClasses;
     }
 
     /**
@@ -253,21 +73,6 @@ abstract class DetachedAction extends Action
         return $this;
     }
 
-    /**
-     * Set the extra CSS classes to be applied to the detached action button.
-     *
-     * @param mixed $classes
-     * @return $this
-     */
-    public function extraClassesWithDefault($classes)
-    {
-        $this->extraClasses = $this->prepareClasses(array_merge(
-            Arr::wrap($this->defaultClasses),
-            Arr::wrap($classes)
-        ));
-
-        return $this;
-    }
 
     /**
      * Get the display classes for the detached action button.
@@ -276,11 +81,10 @@ abstract class DetachedAction extends Action
      */
     public function getClasses()
     {
-        if (empty($this->extraClasses)) {
-            return $this->prepareClasses($this->defaultClasses);
-        }
-
-        return $this->prepareClasses($this->extraClasses);
+        return $this->prepareClasses(array_merge(
+            Arr::wrap($this->defaultClasses),
+            $this->extraClasses
+        ));
     }
 
     public function icon($type)
@@ -319,7 +123,6 @@ abstract class DetachedAction extends Action
         return array_merge([
             'detachedAction' => true,
             'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
-            'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
             'classes' => $this->getClasses(),
             'icon' => $this->icon,
             'iconClasses' => $this->iconClasses,

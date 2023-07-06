@@ -8,7 +8,11 @@ A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached f
 
 :warning: Also, keep in mind, pivot actions are not supported and have not been tested.
 
-![screenshot](https://i.imgur.com/S8GrNFI.png)
+![buttons](branding/actions.jpg)
+
+With mobile compatibility
+
+<img src="branding/mobile_actions.jpg" alt="mobile actions" style="width:320px;"/>
 
 ## Installation
 
@@ -36,8 +40,6 @@ You can also customize the button name, by overriding the `name()` method. If yo
 
 By default, the detached action will only appear on the Index Toolbar.
 
-If you want to also show the action on the resource index view (when users select a row with a checkbox), set the `$public $showOnIndex = true;`
-If you want to also show the action on the resource detail view (when user selects the action from the dropdown), set the `$public $showOnDetail = true;`
 
 Here's a full example:
 
@@ -125,32 +127,6 @@ public function handleRequest(ActionRequest $request): array
 }
 ```
 
-### Display on different screens
-
-##### `showOnIndexToolbar()`
-Show the detached action buttons on the index page toolbar (i.e. the default location). Do not show on the index grid action dropdown, 
-
-##### `onlyOnIndexToolbar()`
-Only show the detached action buttons on the index toolbar. Do not show them anywhere else.
-
-##### `exceptOnIndexToolbar`
-Show the detached action buttons everywhere except the index toolbar.
-
-##### `onlyOnIndex`
-Show the detached action buttons only on the index view. Allows them to be displayed on the `standalone` dropdown or in the grid action dropdown.
-
-##### `showOnDetailToolbar()`
-Show the detached action buttons on the detail page toolbar (i.e. the default location).
-
-##### `onlyOnDetailToolbar()`
-Only show the detached action buttons on the index toolbar. Do not show them anywhere else.
-
-##### `exceptOnDetailToolbar`
-Show the detached action buttons everywhere except the detail toolbar.
-
-##### `onlyOnDetail`
-Show the detached action buttons only on the detail view. Allows them to be displayed on the `standalone` dropdown or in the action dropdown.
-
 ### Usage with the Laravel Nova Excel `DownloadExcel` action
 
 You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel](https://github.com/Maatwebsite/Laravel-Nova-Excel) `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
@@ -190,43 +166,16 @@ public static function additionalInformation(Request $request)
 }
 ```
 
-You can also change the icon type and whether or not you want to display a dropdown arrow for the invisible action menu:
-
-```php
-public static function additionalInformation(Request $request)
-{
-    return [
-        'visibleActionsLimit' => 2,
-        'showInvisibleActionsArrow' => true,
-        'invisibleActionsIcon' => 'menu'
-    ];
-}
-```
-
 
 ### Customizing Button Classes
 
 The package ships with some common sense default HTML classes that are applied to the action buttons. In the component, we automatically assign the following:
 
 ```
-btn btn-default ml-3 detached-action-button flex justify-center items-center
+hover:bg-gray-200 dark:hover:bg-gray-800 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0
 ```
 
-The action buttons are buttons so it makes sense to assign the `btn` and `btn-default` classes, we also want consistent spacing between buttons, so we apply `ml-3` and to line up the icons and text inside the button, we use `flex justify-center items-center`. Further, in order to allow theme developers to set a specific class name to hook into, we apply `detached-action-button` on both the Index and Detail views.
-
-On top of these classes, the `DetachedAction` class provides `btn-primary` as a default, that will give the buttons the default button color, i.e. blue in the default Nova theme.
-
-A developer can add classes on the fly, using the `extraClassesWithDefault()` and `extraClasses()` methods on the `DetachedAction` class.
-
-### The `extraClassesWithDefault()` method
-
- If you want to keep the default classes but add extra classes alongside them, then you probably want to use this method. You can pass an array of single class names or multiple class names separated by spaces.
-
-```php
-return [
-    (new ImportUsers)->extraClassesWithDefault('bg-info')
-];
-```
+A developer can add classes on the fly, using the `extraClasses()` method on the `DetachedAction` class.
 
 ### The `extraClasses()` method
 
@@ -237,6 +186,15 @@ return [
    (new ImportUsers)->extraClasses('bg-logo text-white hover:black')
 ];
 ```
+
+You can also extend `DetachedAction` class and change the default classes on `$defaultClasses` variable.
+
+For example you can add the classes to be equal to nova primary button
+
+```
+shadow ring-primary-200 dark:ring-gray-600 bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800
+```
+
 
 ### Adding an icon
 
@@ -256,8 +214,6 @@ return [
 ];
 ```
 
-
-![screenshot](https://i.imgur.com/9PaOxZC.png)
 
 ## License
 

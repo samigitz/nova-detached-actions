@@ -9,9 +9,9 @@ mix
   .nova("datomatic/nova-detached-actions");
 
 mix.alias({
+  "@": path.join(__dirname, "vendor/laravel/nova/resources/js"),
   "laravel-nova": path.join(
     __dirname,
     "vendor/laravel/nova/resources/js/mixins/packages.js"
   ),
-  "@": path.join(__dirname, "../../vendor/laravel/nova/resources/js"),
 });
