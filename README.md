@@ -1,3 +1,5 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/nova-detached-actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/datomatic/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/nova-detached-actions)
 # Laravel Nova Detached Actions Tool
 
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
