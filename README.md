@@ -4,13 +4,14 @@
 
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
 
-:warning: Keep in mind, since the action is detached from the row selection checkboxes in the resource table, you will not have a collection of models to iterate over. Detached actions are intended to be independent of the selection in the table.
+The action is detached from the row selection checkboxes in the resource table, so you will not have a collection of models to iterate over. 
+Detached actions are intended to be independent of the selection in the table.
 
-:warning: Also, keep in mind, pivot actions are not supported and have not been tested.
+:warning: Pivot actions are not supported and have not been tested.
 
 ![actions](branding/actions.jpg)
 
-With mobile compatibility
+Mobile compatibility
 
 <img src="branding/mobile_actions.jpg" alt="mobile actions" style="width:320px;"/>
 
@@ -36,9 +37,7 @@ Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Acti
 
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
-You can also customize the button name, by overriding the `name()` method. If you do not override the name, it will 'humanize' the class name, in the example `ExportUsers` would become `Export Users`.
-
-By default, the detached action will only appear on the Index Toolbar.
+After registration the detached action will appear on the Index Toolbar.
 
 
 Here's a full example:
@@ -59,12 +58,7 @@ class ExportUsers extends DetachedAction
 {
     use InteractsWithQueue, Queueable, SerializesModels;
     
-    /**
-     * Get the displayable label of the button.
-     *
-     * @return string
-     */
-    public function label()
+    public function name(): string
     {
         return __('Export Users');
     }
@@ -107,13 +101,82 @@ Register the action on your resource:
 public function actions(Request $request)
 {
     return [
-        new App\Nova\Actions\ExportUsers
+        new App\Nova\Actions\ExportUsers // or App\Nova\Actions\ExportUsers::make() 
     ];
 }
 ```
 
+
+### Customizing Buttons
+
+### Visible vs Invisible Buttons
+
+By default, the component will show the first 3 buttons and put the rest into a dropdown menu.
+In the dropdown menu you can't add icon or extra classes because it use the nova dropdown component.
+If you want to change the number of buttons visible per resource, you can do so by using the `additionalInformation` method, like so:
+
+```php
+public static function additionalInformation(Request $request)
+{
+    return [
+        'visibleActionsLimit' => 2
+    ];
+}
+```
+![invisible actions](branding/invisible_actions.jpg)
+
+### Customizing Button Classes
+
+The package ships with some common sense default HTML classes that are applied to the action buttons. In the component, we automatically assign the following:
+
+```
+hover:bg-gray-200 dark:hover:bg-gray-900 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0
+```
+
+A developer can add classes on the fly, using the `extraClasses()` method on the `DetachedAction` class.
+
+### The `extraClasses()` method
+
+You are free to use any tailwind/nova class.
+
+```php
+return [
+   (new ImportUsers)->extraClasses('bg-primary-500 text-white hover:black')
+];
+```
+### The `$defaultClasses` variable
+
+You can also extend `DetachedAction` class and change the default classes on `$defaultClasses` variable.
+
+For example, you can add the classes to be equal to nova primary button
+
+```
+shadow ring-primary-200 dark:ring-gray-600 bg-primary-500 hover:bg-primary-400 dark:hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800
+```
+
+
+### Adding an icon
+
+You can use any of the [104 Heroicon icons](https://v1.heroicons.com/) by specifying the icon name in lowercase:
+
+```php
+return [
+   (new ImportUsers)->icon('add')
+];
+```
+
+You can also customize the display of that icon using `iconClasses`:
+
+```php
+return [
+   (new ImportUsers)->icon('upload')->iconClasses('mr-3 -ml-2')
+];
+```
+
+
 ## Chunking and repetitive calls to the handle()
-If you initiate an action on the background Nova will chunk up the total amount of records and call the `handle()` function of your DetachedAction for each chunk. This could have unexpected performance impact as the system will perform your action for each chunk of records.
+If you initiate an action on the background Nova will chunk up the total amount of records and call the `handle()` function of your DetachedAction for each chunk. 
+This could have unexpected performance impact as the system will perform your action for each chunk of records.
 This happens in the `handleRequest()` function of `\Laravel\Nova\Actions\Action.php`.
 
 To prevent this the simplest way is to overrule this function in your `DetachedAction`. this is a bare example dispatching just a job without any checks or other logic:
@@ -151,69 +214,6 @@ You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel]
  }
  ```
 
-### Customizing Buttons
-
-### Visible vs Invisible Buttons
-
-By default, the component will show the first 3 buttons and put the rest into a dropdown menu. If you want to change the number of buttons visible per resource, you can do so by using the `additionalInformation` method, like so:
-
-```php
-public static function additionalInformation(Request $request)
-{
-    return [
-        'visibleActionsLimit' => 2
-    ];
-}
-```
-![invisible actions](branding/invisible_actions.jpg)
-
-### Customizing Button Classes
-
-The package ships with some common sense default HTML classes that are applied to the action buttons. In the component, we automatically assign the following:
-
-```
-hover:bg-gray-200 dark:hover:bg-gray-800 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0
-```
-
-A developer can add classes on the fly, using the `extraClasses()` method on the `DetachedAction` class.
-
-### The `extraClasses()` method
-
-You are free to use any tailwind/nova class.
-
-```php
-return [
-   (new ImportUsers)->extraClasses('bg-logo text-white hover:black')
-];
-```
-### The `$defaultClasses` variable
-
-You can also extend `DetachedAction` class and change the default classes on `$defaultClasses` variable.
-
-For example, you can add the classes to be equal to nova primary button
-
-```
-shadow ring-primary-200 dark:ring-gray-600 bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800
-```
-
-
-### Adding an icon
-
-You can use any of the 104 Heroicon icons by specifying the icon name in lowercase:
-
-```php
-return [
-   (new ImportUsers)->icon('add')
-];
-```
-
-You can also customize the display of that icon using `iconClasses`:
-
-```php
-return [
-   (new ImportUsers)->icon('upload')->iconClasses('mr-3 -ml-2')
-];
-```
 
 
 ## License

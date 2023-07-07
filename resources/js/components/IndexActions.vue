@@ -67,7 +67,7 @@ const getActions = () => {
             }).visibleActionsLimit ?? 3
 
             visibleActions.value = (visibleActionsLimit === 0) ? [] : allActions.value.slice(0, visibleActionsLimit).reverse()
-            invisibleActions.value = allActions.value.slice(visibleActionsLimit).reverse();
+            invisibleActions.value = allActions.value.slice(visibleActionsLimit);
 
         })
 };

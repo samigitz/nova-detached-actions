@@ -8,11 +8,6 @@ use Laravel\Nova\Actions\Action;
 
 abstract class DetachedAction extends Action
 {
-    /**
-     * Indicates if this action is only available on the custom index toolbar.
-     *
-     * @var bool
-     */
     public $showOnIndexToolbar = true;
     public $onlyOnIndex = false;
     public $onlyOnDetail = false;
@@ -23,18 +18,14 @@ abstract class DetachedAction extends Action
 
     /**
      * Extra CSS classes to apply to detached action button.
-     *
-     * @var array
      */
-    public $extraClasses = [];
+    public string $extraClasses = '';
 
 
     /**
      * Default CSS classes to apply to detached action button.
-     *
-     * @var array
      */
-    public $defaultClasses = ['hover:bg-gray-200 dark:hover:bg-gray-800 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0'];
+    public string $defaultClasses = 'hover:bg-gray-200 dark:hover:bg-gray-900 flex-shrink-0 rounded focus:outline-none focus:ring inline-flex items-center font-bold px-3 h-9 text-sm flex-shrink-0';
 
     /**
      * The icon type.
@@ -45,30 +36,23 @@ abstract class DetachedAction extends Action
 
     /**
      * CSS classes to customize the display of an icon in a button.
-     *
-     * @var string
      */
-    public $iconClasses = '';
+    public string $iconClasses = '';
 
     /**
      * Determine if the action is to be shown on the custom index toolbar.
-     *
-     * @return bool
      */
-    public function shownOnIndexToolbar()
+    public function shownOnIndexToolbar(): bool
     {
         return $this->showOnIndexToolbar;
     }
 
     /**
      * Set the extra CSS classes to be applied to the detached action button.
-     *
-     * @param mixed $classes
-     * @return $this
      */
-    public function extraClasses($classes)
+    public function extraClasses(string $classes): self
     {
-        $this->extraClasses = $this->prepareClasses(Arr::wrap($classes));
+        $this->extraClasses = $this->prepareClasses($classes);
 
         return $this;
     }
@@ -76,15 +60,10 @@ abstract class DetachedAction extends Action
 
     /**
      * Get the display classes for the detached action button.
-     *
-     * @return array
      */
-    public function getClasses()
+    public function getClasses(): string
     {
-        return $this->prepareClasses(array_merge(
-            Arr::wrap($this->defaultClasses),
-            $this->extraClasses
-        ));
+        return $this->prepareClasses($this->defaultClasses.' '.$this->extraClasses);
     }
 
     public function icon($type)
@@ -94,7 +73,7 @@ abstract class DetachedAction extends Action
         return $this;
     }
 
-    public function iconClasses($classes)
+    public function iconClasses(string $classes): self
     {
         $this->iconClasses = $this->prepareClasses($classes);
 
@@ -103,14 +82,10 @@ abstract class DetachedAction extends Action
 
     /**
      * Prepare the classes so that a string or an array of strings is formatted correctly.
-     *
-     * @param string|array $classes
-     *
-     * @return array
      */
-    protected function prepareClasses($classes)
+    protected function prepareClasses(string $classes): string
     {
-        return array_filter(array_map('trim', Arr::wrap($classes)));
+        return trim(preg_replace('/\s+/', ' ', $classes));;
     }
 
     /**
