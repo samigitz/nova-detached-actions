@@ -176,7 +176,6 @@ return [
 ];
 ```
 
-
 ## Chunking and repetitive calls to the handle()
 If you initiate an action on the background Nova will chunk up the total amount of records and call the `handle()` function of your DetachedAction for each chunk. 
 This could have unexpected performance impact as the system will perform your action for each chunk of records.
@@ -192,30 +191,6 @@ public function handleRequest(ActionRequest $request): array
     return DetachedAction::message('Nice job!');
 }
 ```
-
-## Usage with the Laravel Nova Excel `DownloadExcel` action
-
-You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel](https://github.com/Maatwebsite/Laravel-Nova-Excel) `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
-
-```php
-/**
-  * Get the actions available for the resource.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @return array
-  */
- public function actions(Request $request)
- {
-     return [
-         (new DownloadExcel)->withHeadings()->askForWriterType()->withMeta([
-             'detachedAction' => true,
-             'label' => 'Export',
-             'name' => 'Export',
-             'showOnIndexToolbar' => true
-         ])->confirmButtonText('Export'),
-     ];
- }
- ```
 
 
 

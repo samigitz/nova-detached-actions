@@ -8,7 +8,6 @@ use Laravel\Nova\Actions\Action;
 
 abstract class DetachedAction extends Action
 {
-    public $showOnIndexToolbar = true;
     public $onlyOnIndex = false;
     public $onlyOnDetail = false;
     public $showOnIndex = false;
@@ -97,7 +96,6 @@ abstract class DetachedAction extends Action
     {
         return array_merge([
             'detachedAction' => true,
-            'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
             'classes' => $this->getClasses(),
             'icon' => $this->icon,
             'iconClasses' => $this->iconClasses,

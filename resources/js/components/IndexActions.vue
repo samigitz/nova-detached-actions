@@ -59,7 +59,7 @@ const getActions = () => {
         .then(response => {
             allActions.value = _.filter(
                 response.data.actions,
-                (action) => action.showOnIndexToolbar
+                (action) => action.detachedAction
             );
 
             let visibleActionsLimit = find(Nova.config('resources'), resource => {
