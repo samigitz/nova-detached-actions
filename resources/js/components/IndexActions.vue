@@ -23,7 +23,8 @@
 </template>
 <script setup>
 
-import find from 'lodash/find'
+import find from 'lodash/find';
+import filter from 'lodash/filter';
 import {onMounted, ref} from "vue";
 
 
@@ -57,7 +58,7 @@ const getActions = () => {
             }
         })
         .then(response => {
-            allActions.value = _.filter(
+            allActions.value = filter(
                 response.data.actions,
                 (action) => action.detachedAction
             );
