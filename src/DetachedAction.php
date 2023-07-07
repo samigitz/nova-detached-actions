@@ -12,7 +12,6 @@ abstract class DetachedAction extends Action
     public $onlyOnDetail = false;
     public $showOnIndex = false;
     public $showOnDetail = false;
-    public $showOnTableRow = false;
     public $standalone = true;
 
     /**
