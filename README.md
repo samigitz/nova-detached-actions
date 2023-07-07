@@ -5,7 +5,10 @@ A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached f
 The action is detached from the row selection checkboxes in the resource table, so you will not have a collection of models to iterate over. 
 Detached actions are intended to be independent of the selection in the table.
 
+This is a fork of [gobrightspot/nova-detached-actions](https://github.com/gobrightspot/nova-detached-actions) abandoned repo, i rewrite a lot of part in using vue 3 composition api. 
+
 :warning: Pivot actions are not supported and have not been tested.
+
 
 ![actions](branding/actions.jpg)
 
