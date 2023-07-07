@@ -46,7 +46,6 @@ abstract class DetachedAction extends Action
         return $this;
     }
 
-
     /**
      * Get the display classes for the detached action button.
      */
