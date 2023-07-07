@@ -1,7 +1,5 @@
 # Laravel Nova Detached Actions Tool
 
-## Intro
-
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
 
 The action is detached from the row selection checkboxes in the resource table, so you will not have a collection of models to iterate over. 
