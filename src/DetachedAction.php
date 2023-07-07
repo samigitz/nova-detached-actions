@@ -38,13 +38,6 @@ abstract class DetachedAction extends Action
      */
     public string $iconClasses = '';
 
-    /**
-     * Determine if the action is to be shown on the custom index toolbar.
-     */
-    public function shownOnIndexToolbar(): bool
-    {
-        return $this->showOnIndexToolbar;
-    }
 
     /**
      * Set the extra CSS classes to be applied to the detached action button.
