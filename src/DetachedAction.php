@@ -51,7 +51,7 @@ abstract class DetachedAction extends Action
      */
     public function getClasses(): string
     {
-        return $this->prepareClasses($this->defaultClasses.' '.$this->extraClasses);
+        return $this->prepareClasses($this->defaultClasses . ' ' . $this->extraClasses);
     }
 
     public function icon($type)
@@ -73,7 +73,7 @@ abstract class DetachedAction extends Action
      */
     protected function prepareClasses(string $classes): string
     {
-        return trim(preg_replace('/\s+/', ' ', $classes));;
+        return trim(preg_replace('/\s+/', ' ', $classes));
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class DetachedAction extends Action
      *
      * @return array
      */
-    public function jsonSerialize() :array
+    public function jsonSerialize(): array
     {
         return array_merge([
             'detachedAction' => true,
