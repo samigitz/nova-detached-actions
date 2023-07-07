@@ -19,7 +19,6 @@ abstract class DetachedAction extends Action
      */
     public string $extraClasses = '';
 
-
     /**
      * Default CSS classes to apply to detached action button.
      */
@@ -36,7 +35,6 @@ abstract class DetachedAction extends Action
      * CSS classes to customize the display of an icon in a button.
      */
     public string $iconClasses = '';
-
 
     /**
      * Set the extra CSS classes to be applied to the detached action button.
