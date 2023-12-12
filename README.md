@@ -98,10 +98,10 @@ Register the action on your resource:
 /**
  * Get the actions available for the resource.
  *
- * @param  \Illuminate\Http\Request  $request
+ * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
  * @return array
  */
-public function actions(Request $request)
+public function actions(NovaRequest $request)
 {
     return [
         new App\Nova\Actions\ExportUsers // or App\Nova\Actions\ExportUsers::make() 
@@ -116,7 +116,7 @@ public function actions(Request $request)
 
 By default, the component will show the first 3 buttons and put the rest into a dropdown menu.
 In the dropdown menu you can't add icon or extra classes because it use the nova dropdown component.
-If you want to change the number of buttons visible per resource, you can do so by using the `additionalInformation` method, like so:
+If you want to change the number of buttons visible per resource, you can do so by using the `additionalInformation` method in the resource class, like so:
 
 ```php
 public static function additionalInformation(Request $request)
