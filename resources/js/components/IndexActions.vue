@@ -58,7 +58,6 @@ const getActions = () => {
         }
       })
       .then(response => {
-        console.log(response.data.actions);
         allActions.value = filter(
             response.data.actions,
             (action) => action.detachedAction
