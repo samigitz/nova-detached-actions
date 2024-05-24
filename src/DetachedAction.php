@@ -8,10 +8,19 @@ use Laravel\Nova\Actions\Action;
 
 abstract class DetachedAction extends Action
 {
+    /** @var bool */
     public $onlyOnIndex = false;
+
+    /** @var bool */
     public $onlyOnDetail = false;
+
+    /** @var bool */
     public $showOnIndex = false;
+
+    /** @var bool */
     public $showOnDetail = false;
+
+    /** @var bool */
     public $standalone = true;
 
     /**
@@ -26,10 +35,8 @@ abstract class DetachedAction extends Action
 
     /**
      * The icon type.
-     *
-     * @var string
      */
-    public $icon = '';
+    public string $icon = '';
 
     /**
      * CSS classes to customize the display of an icon in a button.
