@@ -1,5 +1,10 @@
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/nova-detached-actions)
-[![Total Downloads](https://img.shields.io/packagist/dt/datomatic/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/nova-detached-actions)
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/samigitz/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/samigitz/nova-detached-actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/samigitz/nova-detached-actions.svg?style=for-the-badge)](https://packagist.org/packages/samigitz/nova-detached-actions)
 # Laravel Nova Detached Actions Tool
 
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
@@ -11,6 +16,11 @@ This is a fork of [gobrightspot/nova-detached-actions](https://github.com/gobrig
 
 :warning: Pivot actions are not supported and have not been tested.
 
+## Version support
+ - Nova 4|5
+ - Laravel ^8
+
+ ---------
 
 ![actions](branding/actions.jpg)
 
@@ -23,7 +33,7 @@ Mobile compatibility
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
 ```bash
-composer require datomatic/nova-detached-actions
+composer require samigitz/nova-detached-actions
 ```
 
 The tool will be automatically registered via the `ToolServiceProvider`
@@ -36,7 +46,7 @@ Create a custom Nova Action file:
 php artisan nova:action ExportUsers
 ```
 
-Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Datomatic\Nova\Tools\DetachedActions\DetachedAction` class.
+Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Samigitz\Nova\Tools\DetachedActions\DetachedAction` class.
 
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
@@ -50,7 +60,7 @@ Here's a full example:
 
 namespace App\Nova\Actions;
 
-use Datomatic\Nova\Tools\DetachedActions\DetachedAction;
+use Samigitz\Nova\Tools\DetachedActions\DetachedAction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
